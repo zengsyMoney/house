@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.dao.HouseDao">
+  
+  <sql id="cols">
+  	id,sname,dname,tname,title,description,price,pubdate,floorrage,contact 
+  </sql>
+  <resultMap type="House" id="houseMap">
+  	<id column="id" property="id"/>
+  	<association property="street_id" javaType="Street">
+  		<association property="district_id" javaType="District"/>
+  	</association>
+  	<association property="type_id" javaType="Type"/>
+  </resultMap>
+  <select id="selectHouse" resultMap="houseMap">
+  	select <include refid="cols"/> FROM house h,district d,street s,type t
+  	WHERE h.street_id=s.sid AND s.district_id=d.did AND h.type_id=t.tid
+  </select>
+  
+</mapper>

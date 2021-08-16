@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="mysql.properties"/>
+	
+	<settings>
+		<setting name="logImpl" value="STDOUT_LOGGING"/>
+		<setting name="useGeneratedKeys" value="true"/>
+		<setting name="autoMappingBehavior" value="FULL"/>
+	</settings>
+	
+	<typeAliases>
+		<!-- 方法一 -->
+		<!-- <typeAlias alias="Emp" type="com.bdqn.pojo.Emp"/> -->
+		<!-- 方法二 :不能取别名，名字只能是自己的类名，不区分大小写-->
+		<package name="com.bdqn.pojo"/>
+	</typeAliases>
+	
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+   <!--  <mapper resource="com/bdqn/pojo/EmpDao.xml"/> -->
+   <package name="com.bdqn.dao"/>
+  </mappers>
+</configuration>
